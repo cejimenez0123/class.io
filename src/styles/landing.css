@@ -1,0 +1,37 @@
+.landing{
+    display:flex;
+    flex-direction: row;
+    width: 100vw;
+}
+.sign--card{
+    flex:58;
+    text-align: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: white;
+}
+.sign--card .heading{
+    font-weight: bold;
+    font-size: 2rem;
+    color:black
+}
+.sign--card form{
+    margin: auto;
+    text-align: left;
+    width: 30em;
+  
+   
+}
+.login--input{
+    background-color: white;
+    border: 1px gray solid;
+}
+.sign--card .main{
+    margin: 6em auto;
+   
+    
+}
+.logo--card{
+    flex:42;
+    text-align: center;
+}
