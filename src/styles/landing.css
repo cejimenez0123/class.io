@@ -3,7 +3,7 @@
     flex-direction: row;
     width: 100vw;
 }
-.sign--card{
+.land--card{
     flex:58;
     text-align: center;
     justify-content: center;
@@ -15,7 +15,7 @@
     font-size: 2rem;
     color:black
 }
-.sign--card form{
+.main form{
     margin: auto;
     text-align: left;
     width: 30em;
@@ -34,4 +34,10 @@
 .logo--card{
     flex:42;
     text-align: center;
+}
+
+@keyframes easeout {
+    100% {
+      transform: translateX(100%)
+    }
 }
