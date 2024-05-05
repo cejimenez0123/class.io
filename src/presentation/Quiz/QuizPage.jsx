@@ -3,18 +3,21 @@ import useSWR from 'swr'
 import axios from 'axios'
 import Enviroment from '../../core'
 import { useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import "../../styles/quiz.css"
 import AnswerCard from './AnswerCard'
+import MyContext from '../../context'
 const fetcher = url => axios(url,{headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}}).then(r => r.data)
 const Alphabet = ["A","B","C","D"]
 function QuizPage(props){
+    const navigate = useNavigate()
+    const {setChosenAnswers,correctAnswers,setCorrectAnswers} = useContext(MyContext)
     const [questions,setQuestions]=useState([])
     const [question,setQuestion]=useState(null)
     const [answers,setAnswers]=useState([])
     const [active,setActive]=useState(true)
-    const [chosenAnswers,setChosenAnswers]=useState([])
-    const [correctAnswers,setCorrectAnswers]=useState([])
+    
     const params = useParams()
     const topicId = params["id"]
     function getQuestion(){
@@ -25,6 +28,13 @@ function QuizPage(props){
             setQuestions(prevState=>{return[...prevState,question]})
             setActive(true)
         }) 
+    }
+    const newQuiz = ()=>{
+        setChosenAnswers([])
+        setCorrectAnswers([])
+        setQuestions([])
+        getQuestion()
+
     }
     function handleChoice(answer,response){
         
@@ -40,6 +50,9 @@ function QuizPage(props){
         }
 
        
+    }
+    const handleDone = ()=>{
+        navigate("/quiz/complete")
     }
     return(<div id='quiz--page'>
         
@@ -57,10 +70,22 @@ function QuizPage(props){
             </div>
 
             <div className="buttons">
-            {question?<div><button className='btn-primary border-solid  my-40 border-black w-48 bg-black text-white mx-4 hover:bg-slate-400 border rounded-sm px-8 py-4'
-             onClick={getQuestion}>Next</button><button className='btn-primary border-solid  my-40 border-black w-48 bg-white hover:bg-slate-400 border rounded-sm px-8 py-4'>Done</button></div>:
+            {question?
+            <div>
+                <button className='btn-primary border-solid  my-40 border-black w-48 bg-black text-white mx-4 hover:bg-slate-400 border rounded-sm px-8 py-4'
+             onClick={getQuestion}>Next</button>
+             <button onClick={handleDone} className='btn-primary 
+                                border-solid  
+                                my-40 border-black 
+                                w-48 bg-white 
+                                hover:bg-slate-400 
+                                border 
+                                rounded-sm 
+                                px-8 
+                                py-4'>
+                Done</button></div>:
             <button className='btn-primary border-solid  my-40 border-black w-48 bg-white hover:bg-slate-400 border rounded-sm px-8 py-4'
-             onClick={getQuestion}>Start</button>}
+             onClick={newQuiz}>Start</button>}
             </div>
 
     </div>)
