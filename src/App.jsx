@@ -20,13 +20,12 @@ import LogoCard from './presentation/Landing/LogoCard'
 import ProfilePage from './presentation/Profile/ProfilePage'
 function App() {
   const [quiz,setQuiz]= useState(null)
-  const [token,setToken]=useState(null)
   const [chosenAnswers,setChosenAnswers]=useState([])
     const [correctAnswers,setCorrectAnswers]=useState([])
   
   return (
     <>
-      <MyContext.Provider value={{quiz,setQuiz,token,setToken,chosenAnswers,setChosenAnswers,correctAnswers,setCorrectAnswers}}>
+      <MyContext.Provider value={{quiz,setQuiz,chosenAnswers,setChosenAnswers,correctAnswers,setCorrectAnswers}}>
       <Navbar/>
     <Routes>
          

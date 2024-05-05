@@ -1,13 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios"
 import Enviroment from "../core";
-import { useState,useEffect, useContext } from "react";
-import MyContext from "../context";
+import { useState,useEffect, } from "react";
 
 
 export default function Navbar(props){
 
-    const {token,setToken}= useContext(MyContext)
+ 
    
     const navigate = useNavigate()
     const checkAuth=()=>{
@@ -19,30 +18,30 @@ export default function Navbar(props){
              }
             }).then(res=>{
             if(res.status==200){
-              setToken(tokenStr)
+            
               console.log("tokenStr",tokenStr)
-              console.log("token",token)
+     
             }   
           }).catch(err=>{
-            setToken(null)
+        
             localStorage.removeItem("token")
             console.log("tokenStr",tokenStr)
-            console.log("token",token)
+           
           }
           )
         }
       
     }
       const logOut=()=>{
-        setToken(null)
+        localStorage.removeItem("token")
         navigate("/")
       }
       useEffect(()=>{
         checkAuth()
         return ()=>{}
       },[])
-      const loggedOut = !token
-      const loggedIn = token
+      const loggedIn=localStorage.getItem("token")
+      const loggedOut=!loggedIn
     return(
 <div className="navbar bg-base-100">
 <div className="navbar-start">
@@ -86,7 +85,7 @@ export default function Navbar(props){
     <div className="form-control">
       <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
     </div>
-    {!token||token=="null"?
+    {loggedOut?
 null:<div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
@@ -97,7 +96,6 @@ null:<div className="dropdown dropdown-end">
         <li>
           <Link to="/profile" className="justify-between">
             Profile
-            {/* <span className="badge">New</span> */}
           </Link>
         </li>
         <li><a>Settings</a></li>

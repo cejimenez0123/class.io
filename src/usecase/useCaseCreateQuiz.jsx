@@ -5,7 +5,7 @@ import MyContext from "../context"
 
 
 export default function useCaseCreateQuiz(topicId,token,get){
-    
+        console.log("tokenx",token)
         axios.post(`${Enviroment.BASE_URL}/quiz/`,
         {topicId:topicId},
         {headers:{

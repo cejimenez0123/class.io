@@ -1,12 +1,9 @@
 
-import { useContext, useState } from "react"
+import { useState } from "react"
 import Enviroment from "../../core"
 import { useNavigate} from "react-router-dom"
-import LogoCard from "./LogoCard"
 import axios from "axios"
-import MyContext from "../../context"
 function LoginCard(props){
-    const {setToken}=useContext(MyContext)
     const navigate = useNavigate()
     const navigateToSignUp = ()=>{
         navigate("/register")
@@ -26,11 +23,9 @@ const login = ()=>{
             const {token} = res.data
             setError(false)
             localStorage.setItem("token",token)
-            setToken(token)
             navigate("/home")
             
         }
-        console.log(res)
     }).catch(err=>{
         setError(true)
     })
