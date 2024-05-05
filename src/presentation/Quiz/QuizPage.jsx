@@ -29,6 +29,7 @@ function QuizPage(props){
             setActive(true)
         }) 
     }
+    
     const newQuiz = ()=>{
         setChosenAnswers([])
         setCorrectAnswers([])

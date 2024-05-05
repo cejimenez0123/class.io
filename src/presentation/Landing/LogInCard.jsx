@@ -30,7 +30,7 @@ const login = ()=>{
 return(
 <div className=" login--card">
 <div className='main'>
-<h1 className='heading text-xl mb-12'>Welcome Back!</h1>
+<h1 className='heading text-4xl font-extrabold mt-24 mb-12 text-base-100'>Welcome Back!</h1>
 
 
 
@@ -44,7 +44,7 @@ return(
   <input 
    value={email}
    onChange={(e)=>handleEmail(e)}
-   className=" input text-black bg-white input-bordered w-full rounded  py-2 px-4"
+   className=" input text-base-100 bg-white input-bordered w-full rounded  py-2 px-4"
    id="email" type="text" placeholder="Enter Email"/>
 </div>
 <div className="mb-10">
@@ -54,14 +54,14 @@ return(
   <input 
    value={password}
    onChange={(e)=>handlePassword(e)}
-   className="input input-bordered w-full text-black bg-white rounded py-2 px-4  " 
+   className="input input-bordered w-full text-base-100 bg-white rounded py-2 px-4  " 
    id="password" type="password" placeholder="Enter Password"/>
 </div>
 <div class="flex flex-col items-center justify-between">
-  <button onClick={login} className="bg-black w-64 mb-4 mx-auto hover:bg-grey-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+  <button onClick={login} className="bg-base-100 w-64 mb-4 mx-auto hover:bg-grey-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
     Log In
   </button>
-  <button onClick={navigateToSignUp}className="bg-black w-64 mb-4 mx-auto hover:bg-grey-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+  <button onClick={navigateToSignUp}className="bg-base-100 w-64 mb-4 mx-auto hover:bg-grey-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
     Create Account
   </button>
   <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
@@ -71,7 +71,7 @@ return(
 </form>
 </div>
 </div>
-<LogoCard/>
+
 </div>)
 }
 

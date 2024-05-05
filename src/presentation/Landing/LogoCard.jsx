@@ -6,7 +6,9 @@ return<div className=" logo--card">
  
   <img/>
 </div>
-03
+<div className="mx-auto mt-48 h-48 "  >
+<h1 className="text-6xl font-bold">Class.io</h1>
+</div>
 </div>
 }
 

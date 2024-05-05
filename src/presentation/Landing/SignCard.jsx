@@ -44,13 +44,13 @@ return(
     <div className="landing">
 <div className=" land--card ">
 <div className='main'>
-<h1 className='heading text-xl mb-12'>Welcome Back!</h1>
+<h1 className='heading text-4xl mt-24 mb-12 text-base-100 font-bold '>Welcome Back!</h1>
 
 
 
 
 <div class="w-full max-w">
-<form class=" form-control px-8 pt-6 pb-8 my-auto">
+<form class=" form-control px-8 pt-2 pb-8 my-auto">
 <div class="mb-4">
   <label class="block font-medium text-gray-700  mb-3" for="username">
     Full Name
@@ -72,7 +72,7 @@ return(
    id="username" type="text" placeholder="Enter Email"/>
 </div>
 <div className="mb-10">
-  <label className="block font-medium  text-gray-700  mb-4" for="password">
+  <label className="block font-medium  text-gray-700  mb-3" for="password">
     Create Password
   </label>
   <input 
@@ -89,12 +89,12 @@ return(
    value={confirmPassword}
    onChange={(e)=>handleConfirmPassword(e)}
    className=" border login--input w-full rounded  py-2 px-4"
-   id="confirmPassword" placeholder="Enter Email"/>
+   id="confirmPassword" placeholder="Confirm Password"/>
 </div>
 
   <label className="label cursor-pointer">
-    <span className="label-text">Are you an Educator?</span> 
-    <input onChange={(e)=>handleIsEducator(e)}type="checkbox"  className="checkbox" />
+    <span className="label-text text-xl text-base-100">Are you an Educator?</span> 
+    <input onChange={(e)=>handleIsEducator(e)}type="checkbox"  className="checkbox checkbox-lg checkbox-base-100" />
   </label>
 <div class="flex flex-col items-center justify-between">
   <button onClick={signUp}className="bg-black w-64 mb-4 mx-auto hover:bg-grey-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">

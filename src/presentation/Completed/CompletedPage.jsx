@@ -18,12 +18,12 @@ export default function CompletedPage(props){
     }
     return(<>
         <div id="completed--page">
-                    <div  className="mx-auto border-solid rounded-lg border mt-24 h-72 border-black pt-16 w-64 text-center">
-                        <h1 className="text-3xl font-bold text-black">Your score</h1>
-                        <h1 className="score--h font-extrabold text-4xl text-black">
+                    <div  className="mx-auto border-solid rounded-lg border mt-24 h-72 border-base-100 pt-16 w-64 text-center">
+                        <h1 className="text-3xl font-bold text-base-100 ">Your score</h1>
+                        <h1 className="score--h font-extrabold text-4xl text-base-100">
                             {score}%
                         </h1>
-                        <h1 className="text-xl mt-8">{text}</h1>
+                        <h1 className="text-xl text-base-100 mt-8">{text}</h1>
                     </div>
         </div>
     

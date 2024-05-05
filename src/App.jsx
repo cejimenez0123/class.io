@@ -12,19 +12,29 @@ import TopicTab from './presentation/Landing/TopicCard'
 import LoginCard from './presentation/Landing/LogInCard'
 import HomePage from './presentation/Home/HomePage'
 import QuizPage from './presentation/Quiz/QuizPage'
+import Navbar from './presentation/Navbar'
+import PrivateRoute from './PrivateRoute'
 import MyContext from './context'
+import LoggedRoute from './LoggedRoute'
+import LogoCard from './presentation/Landing/LogoCard'
 function App() {
   const [quiz,setQuiz]= useState(null)
   const [chosenAnswers,setChosenAnswers]=useState([])
     const [correctAnswers,setCorrectAnswers]=useState([])
+  
   return (
     <>
       <MyContext.Provider value={{quiz,setQuiz,chosenAnswers,setChosenAnswers,correctAnswers,setCorrectAnswers}}>
+      <Navbar/>
     <Routes>
-          <Route path="/" element={<LandingPage/>}/>
-          <Route path="/register" element={<SignCard/>}/>
+         
+          <Route path="/" element={<LoggedRoute><LandingPage/></LoggedRoute>
+          }/>
+          <Route path="/register" element={<LoggedRoute><SignCard/></LoggedRoute>}/>
           <Route path="/auth/topics" element={<TopicTab/>}/>
-          <Route path="/home" element={<HomePage/>}/>
+          <Route path="/home" element={
+          <PrivateRoute ><HomePage/></PrivateRoute>
+         }/>
           <Route path="/quiz/topic/:id" element={<QuizPage/>}/>
           <Route path="/quiz/complete" element={<CompletedPage/>}/>
     </Routes>
