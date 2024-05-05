@@ -34,11 +34,7 @@ const login = ()=>{
 return(
 <div className=" login--card">
 <div className='main'>
-<h1 className='heading text-4xl font-extrabold mt-24 mb-12 text-base-100'>Welcome Back!</h1>
-
-
-
-
+    <h1 className='heading text-4xl font-extrabold mt-24 mb-12 text-base-100'>Welcome Back!</h1>
 <div class="w-full max-w">
 <form class=" px-8 pt-6 pb-8 my-auto">
 <div class="mb-4">
