@@ -8,8 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import "../../styles/quiz.css"
 import AnswerCard from './AnswerCard'
 import MyContext from '../../context'
-const fetcher = url => axios(url,{headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}}).then(r => r.data)
-const Alphabet = ["A","B","C","D"]
 function QuizPage(props){
     const navigate = useNavigate()
     const {setChosenAnswers,correctAnswers,setCorrectAnswers} = useContext(MyContext)
@@ -19,9 +17,10 @@ function QuizPage(props){
     const [active,setActive]=useState(true)
     
     const params = useParams()
-    const topicId = params["id"]
+    const topicId = params["topicId"]
+    const quizId = params["quizId"]
     function getQuestion(){
-        axios.get(`${Enviroment.BASE_URL}/question/topic/${topicId}/${1}`).then(res=>{
+        axios.get(`${Enviroment.BASE_URL}/question/topic/${topicId}/quiz/${quizId}`).then(res=>{
             const {question,answers}= res.data
             setQuestion(question)
             setAnswers(answers)
@@ -59,7 +58,7 @@ function QuizPage(props){
         
             <div className='mx-auto pt-16'>
                 {question?<div className='main'>
-                    <h1 className='text-xl quiz--question'>{questions.length}. {question.content}</h1>
+                    <h1 className='text-xl text-base-100 quiz--question'>{questions.length}. {question.content}</h1>
 
                     <div>
                         {answers.map((answ,i) =>{
@@ -73,7 +72,7 @@ function QuizPage(props){
             <div className="buttons">
             {question?
             <div>
-                <button className='btn-primary border-solid  my-40 border-black w-48 bg-black text-white mx-4 hover:bg-slate-400 border rounded-sm px-8 py-4'
+                <button className='btn-primary border-solid  my-40 border-black w-48 bg-black text-white mx-4 hover:bg-slate-400 border rounded-lg px-8 py-4'
              onClick={getQuestion}>Next</button>
              <button onClick={handleDone} className='btn-primary 
                                 border-solid  
@@ -81,11 +80,11 @@ function QuizPage(props){
                                 w-48 bg-white 
                                 hover:bg-slate-400 
                                 border 
-                                rounded-sm 
+                                rounded-lg
                                 px-8 
                                 py-4'>
                 Done</button></div>:
-            <button className='btn-primary border-solid  my-40 border-black w-48 bg-white hover:bg-slate-400 border rounded-sm px-8 py-4'
+            <button className='btn-primary border-solid  my-40 border-black w-48 bg-white hover:bg-slate-400 border rounded-lg px-8 py-4'
              onClick={newQuiz}>Start</button>}
             </div>
 

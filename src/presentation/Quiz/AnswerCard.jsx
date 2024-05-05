@@ -17,7 +17,7 @@ function AnswerCard(props){
            
         }):null
     }key={props.answer.id}>
-        <button ref={ref} className={`btn-primary  bg-white border-solid border-black hover:bg-slate-200 w-36 my-2 px-8 py-4`}>
+        <button ref={ref} className={`btn-primary  bg-white border-solid border-base-100 hover:bg-slate-100 w-36 my-2 px-8 py-4`}>
             <h2>{Alphabet[props.index]}.   {props.answer.content}</h2></button></div>
     )
 }

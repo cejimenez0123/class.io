@@ -17,14 +17,16 @@ import PrivateRoute from './PrivateRoute'
 import MyContext from './context'
 import LoggedRoute from './LoggedRoute'
 import LogoCard from './presentation/Landing/LogoCard'
+import ProfilePage from './presentation/Profile/ProfilePage'
 function App() {
   const [quiz,setQuiz]= useState(null)
+  const [token,setToken]=useState(null)
   const [chosenAnswers,setChosenAnswers]=useState([])
     const [correctAnswers,setCorrectAnswers]=useState([])
   
   return (
     <>
-      <MyContext.Provider value={{quiz,setQuiz,chosenAnswers,setChosenAnswers,correctAnswers,setCorrectAnswers}}>
+      <MyContext.Provider value={{quiz,setQuiz,token,setToken,chosenAnswers,setChosenAnswers,correctAnswers,setCorrectAnswers}}>
       <Navbar/>
     <Routes>
          
@@ -35,7 +37,8 @@ function App() {
           <Route path="/home" element={
           <PrivateRoute ><HomePage/></PrivateRoute>
          }/>
-          <Route path="/quiz/topic/:id" element={<QuizPage/>}/>
+          <Route path="/quiz/:quizId/topic/:topicId" element={<QuizPage/>}/>
+          <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}/>
           <Route path="/quiz/complete" element={<CompletedPage/>}/>
     </Routes>
     </MyContext.Provider>

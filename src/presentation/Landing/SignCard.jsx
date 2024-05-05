@@ -1,11 +1,13 @@
 
 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import LogoCard from "./LogoCard"
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 import Enviroment from "../../core"
+import MyContext from "../../context"
 function SignCard(props){
+    const {setToken}=useContext(MyContext)
     const navigate = useNavigate()
     const [name,setName]=useState("")
     const [email,setEmail]=useState("")
@@ -35,7 +37,8 @@ function SignCard(props){
                     password:password}).then(res=>{
 
                         if(res.data && res.data.token){
-                            localStorage.setItem('token',res.data.token)
+                            localStorage.setItem('token',res.data.token);
+                           setToken(res.data.token)
                             navigate("/auth/topics")
                         }
                 

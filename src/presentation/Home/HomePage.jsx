@@ -3,19 +3,18 @@ import useSWR from 'swr'
 import axios from 'axios'
 import Enviroment from '../../core'
 import "../../styles/home.css"
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import useCaseCreateQuiz from '../../usecase/useCaseCreateQuiz'
-const fetcher = url => axios(url,{headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}}).then(r => r.data)
+import { useContext } from 'react'
+import MyContext from '../../context'
+import { useNavigate } from 'react-router-dom'
 function HomePage(props){
+    const navigate = useNavigate()
+    const {token,setQuiz}= useContext(MyContext)
+    const fetcher = url => axios(url,{headers:{Authorization: `Bearer ${token}`}}).then(r => r.data)
     const { data, error, isLoading } = useSWR(`${Enviroment.BASE_URL}/topic/user`, fetcher)
-    console.log(data)
-    console.log(error)
-    const nav = useNavigate()
-
     const handleNewQuiz = (topic)=>{
-        useCaseCreateQuiz(topic.id,data=>{
-            console.log(data)
+        useCaseCreateQuiz(topic.id,token,data=>{
+            navigate(`/quiz/${data.id}/topic/${data.topicId}/`)
         })
     }
     return (

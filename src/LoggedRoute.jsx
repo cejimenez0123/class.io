@@ -1,10 +1,9 @@
-
-
 import { Navigate } from 'react-router-dom';
-
-
-export default LoggedRoute = ({ children }) => {
-      return token? children : <Navigate to="/home" />;
+import { useContext } from 'react';
+import MyContext from './context';
+const LoggedRoute = ({  children }) => {
+       const {token}= useContext(MyContext)
+      return token?  <Navigate to="/home" />:children ;
     };
-
-  
+//if loggedin go home
+    export default LoggedRoute

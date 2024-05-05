@@ -1,39 +1,48 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios"
 import Enviroment from "../core";
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
+import MyContext from "../context";
 
 
 export default function Navbar(props){
-    const [loggedIn,setLoggedIn] = useState(null)
-    const token =localStorage.getItem('token')
+
+    const {token,setToken}= useContext(MyContext)
+   
+    const navigate = useNavigate()
     const checkAuth=()=>{
-      
-        if(token){
+        const tokenStr = localStorage.getItem("token")
+        if(tokenStr){
           axios.get(Enviroment.BASE_URL+"/auth/", { 
             headers: 
-              { Authorization: "Bearer " + token,
+              { Authorization: "Bearer " + tokenStr,
              }
             }).then(res=>{
-        
-             
             if(res.status==200){
-              setLoggedIn(true)
-            }
-          
+              setToken(tokenStr)
+              console.log("tokenStr",tokenStr)
+              console.log("token",token)
+            }   
           }).catch(err=>{
-            setLoggedIn(false)
-              localStorage.setItem('token',null)
+            setToken(null)
+            localStorage.removeItem("token")
+            console.log("tokenStr",tokenStr)
+            console.log("token",token)
           }
-           
           )
         }
+      
+    }
+      const logOut=()=>{
+        setToken(null)
+        navigate("/")
       }
       useEffect(()=>{
         checkAuth()
         return ()=>{}
       },[])
-      console.log("token",token)
+      const loggedOut = !token
+      const loggedIn = token
     return(
 <div className="navbar bg-base-100">
 <div className="navbar-start">
@@ -42,15 +51,15 @@ export default function Navbar(props){
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </div>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-      {token && token!="null" ? <li><a>Home</a></li>:null}
-      {!token||token=="null"? <li>
+      {loggedIn ? <li><Link to="/home">Home</Link></li>:null}
+      {loggedOut? <li>
           <a>Register</a>
           <ul className="p-2">
             <li><Link to="/">Log In</Link></li>
             <li><Link to="/register">Sign Up</Link></li>
           </ul>
         </li>:null}
-        {/* <li><a>Item 3</a></li> */}
+        {loggedIn ? <li><Link to="/home">Class</Link></li>:null}
       </ul>
     </div>
     </div>
@@ -60,8 +69,8 @@ export default function Navbar(props){
 
       <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      {token && token!="null" ?<li><Link to="/home">Home</Link></li>:null}
-      {!token||token=="null"?<li>
+      {loggedIn ?<li><Link to="/home">Home</Link></li>:null}
+      {loggedOut?<li>
         <details>
           <summary>Register</summary>
           <ul className="p-2">
@@ -70,6 +79,7 @@ export default function Navbar(props){
           </ul>
         </details>
       </li>:null}
+      {loggedIn ?<li><Link to="/class">Class</Link></li>:null}
     </ul>
   </div>
   <div className="flex-none gap-2">
@@ -85,13 +95,13 @@ null:<div className="dropdown dropdown-end">
       </div>
       <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
         <li>
-          <a className="justify-between">
+          <Link to="/profile" className="justify-between">
             Profile
-            <span className="badge">New</span>
-          </a>
+            {/* <span className="badge">New</span> */}
+          </Link>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li onClick={logOut}><a>Logout</a></li>
       </ul>
     </div>}
   </div>

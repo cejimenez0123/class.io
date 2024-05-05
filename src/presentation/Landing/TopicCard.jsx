@@ -4,11 +4,12 @@ import Enviroment from "../../core"
 import { useEffect, useState } from "react"
 import Topic from "../../domain/model/topic"
 import { useNavigate } from "react-router-dom"
+import MyContext from "../../context"
 function TopicTab(props){
     const navigate = useNavigate()
+    const {token}= useContext(MyContext)
     const [topics,setTopics]=useState([])
     const [topicsChosen,setTopicsChosen]=useState([])
-    const token = localStorage.getItem("token")
     useEffect(()=>{
         axios.get(`${Enviroment.BASE_URL}/topic/`).then(res=>{
           

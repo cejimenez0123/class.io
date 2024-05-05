@@ -1,14 +1,17 @@
 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Enviroment from "../../core"
 import { useNavigate} from "react-router-dom"
 import LogoCard from "./LogoCard"
 import axios from "axios"
+import MyContext from "../../context"
 function LoginCard(props){
+    const {setToken}=useContext(MyContext)
     const navigate = useNavigate()
     const navigateToSignUp = ()=>{
         navigate("/register")
     }
+    const [error,setError]=useState(false)
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const handleEmail = (e)=>{
@@ -20,10 +23,16 @@ function LoginCard(props){
 const login = ()=>{
     axios.post(`${Enviroment.BASE_URL}/user/login`,{email,password}).then(res=>{
         if(res.data && res.data.token){
-            localStorage.setItem('token',res.data.token)
+            const {token} = res.data
+            setError(false)
+            localStorage.setItem("token",token)
+            setToken(token)
             navigate("/home")
+            
         }
         console.log(res)
+    }).catch(err=>{
+        setError(true)
     })
 
 }   
@@ -47,21 +56,24 @@ return(
    className=" input text-base-100 bg-white input-bordered w-full rounded  py-2 px-4"
    id="email" type="text" placeholder="Enter Email"/>
 </div>
-<div className="mb-10">
-  <label className="block font-medium  text-gray-700  mb-4" for="password">
+<div className="mb-2">
+  <label className="block font-medium  text-gray-700  mb-2" for="password">
     <h1>Enter Password</h1>
   </label>
   <input 
    value={password}
    onChange={(e)=>handlePassword(e)}
-   className="input input-bordered w-full text-base-100 bg-white rounded py-2 px-4  " 
+   className="input input-bordered w-full text-base-100 bg-white rounded pt-2 px-4  " 
    id="password" type="password" placeholder="Enter Password"/>
 </div>
+<div className="w-full text-center mb-8">
+{error?<h6 className="text-red-800 font-light">Wrong Email or Password</h6>:null}
+</div>
 <div class="flex flex-col items-center justify-between">
-  <button onClick={login} className="bg-base-100 w-64 mb-4 mx-auto hover:bg-grey-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+  <button onClick={login} className="bg-base-100 w-64 mb-4 mx-auto hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
     Log In
   </button>
-  <button onClick={navigateToSignUp}className="bg-base-100 w-64 mb-4 mx-auto hover:bg-grey-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+  <button onClick={navigateToSignUp}className="bg-base-100 w-64 mb-4  mx-auto hover:bg-slate-700  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
     Create Account
   </button>
   <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
