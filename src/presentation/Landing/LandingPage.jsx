@@ -4,6 +4,7 @@ import axios from "axios"
 import Enviroment from "../../core"
 import SignCard from "./SignCard"
 import LoginCard from "./LogInCard"
+import LogoCard from "./LogoCard"
 
 function LandingPage(props){
   const [page,setPage]=useState(0)
@@ -27,14 +28,8 @@ function LandingPage(props){
 
 </div>
 
- 
-   <div className=" logo--card">
-     <div className='logo'>
-      
-       <img/>
-     </div>
-     03
-   </div>
+ <LogoCard/>
+
        </div>)
 }
 export default LandingPage

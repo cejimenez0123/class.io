@@ -1,0 +1,33 @@
+#quiz--page{
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#quiz--page .start {
+    margin: auto;
+
+    max-width: 4em;
+
+}
+#quiz--page .buttons{
+    margin:4rem auto 0em auto;
+    width:fit-content;
+}
+.success {
+    animation-name: success;
+    animation-duration: 2s;
+}
+
+@keyframes success{
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: aquamarine;
+    }
+  }
+  
