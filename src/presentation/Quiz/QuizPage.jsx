@@ -95,7 +95,7 @@ function QuizPage(props){
                {index+1!==questions.length? 
                <button className='btn-primary
                                     w-48 
-                                    h-24
+                                    h-18
                                     text-offwhite
                                     text-2xl
                                  border-solid  my-24 border-black w-48 bg-base-100 text-white mx-4 hover:bg-slate-400 border rounded-lg px-8 py-4'
@@ -103,8 +103,8 @@ function QuizPage(props){
              <button onClick={handleDone} className='btn-primary 
                                 border-solid  
                                 my-24 border-base-100
-                                w-48 
-                                h-24
+                                w-54 
+                                h-18
                                 text-2xl
                                 text-backtoblack
                                 bg-offwhite
@@ -113,11 +113,11 @@ function QuizPage(props){
                                 rounded-lg
                                 px-8 
                                '>
-                Done</button></div>:<div className='w-64 text-center'>
-                <h1 className='pb-8'>How many questions for this quiz?</h1>
+                Submit Quiz</button></div>:<div className='w-64 text-center'>
+                <h1 className='pb-8'>Enter the amount of questions for the quiz?</h1>
                 <input type="number" className='input w-full bg-offwhite input-bordered max-w-xs'  name='count' value={count} onChange={(e)=>handleCount(e)}/>
             <button className='btn-primary border-solid text-2xl mx-auto my-40 border-backtoblack bg-backtoblack text-offwhite w-64 bg-white hover:bg-slate-400 border rounded-lg px-6 py-4'
-             onClick={newQuiz}>Start</button></div>}
+             onClick={newQuiz}>Start Quiz</button></div>}
             </div>
 
     </div>)

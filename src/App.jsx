@@ -19,6 +19,7 @@ import LoggedRoute from './LoggedRoute'
 import LogoCard from './presentation/Landing/LogoCard'
 import ProfilePage from './presentation/Profile/ProfilePage'
 import ClassPage from './presentation/Class/ClassPage'
+import FlashcardPage from './presentation/Flashcard/FlashcardPage'
 function App() {
   const [quiz,setQuiz]= useState(null)
   const [chosenAnswers,setChosenAnswers]=useState([])
@@ -41,6 +42,7 @@ function App() {
           <Route path="/quiz/:quizId/topic/:topicId" element={<QuizPage/>}/>
           <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}/>
           <Route path="/quiz/complete" element={<CompletedPage/>}/>
+          <Route path="/topic/:topicId/flashcard" element={<FlashcardPage/>}/>
     </Routes>
     </MyContext.Provider>
     </>

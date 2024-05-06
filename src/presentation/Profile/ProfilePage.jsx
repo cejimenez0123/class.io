@@ -3,9 +3,9 @@ import axios from "axios"
 import useSWR from "swr"
 import Enviroment from "../../core"
 import "../../styles/profile.css"
-const token = localStorage.getItem("token")
-const fetcher = url => axios(url,{headers:{Authorization: `Bearer ${token}`}}).then(r => r.data)
 export default function ProfilePage(props){
+    const token = localStorage.getItem("token")
+    const fetcher = url => axios(url,{headers:{Authorization: `Bearer ${token}`}}).then(r => r.data)
     const quizResponse = useSWR(`${Enviroment.BASE_URL}/quiz/`, fetcher)
     const quizzes = quizResponse.data
     const quizzesError = quizResponse.error
@@ -21,10 +21,10 @@ export default function ProfilePage(props){
         </div>)
     }
     if(quizzesError || topicError){
-        console.log(topicError)
-        console.log(quizzesError)
-        return ( <div id="profile--page">
-            Error
+    
+        return ( <div id="profile--page w-full h-full text-cener">
+            
+            <div className="mx-auto mt-54">Error</div>
         </div>)
     }
     return(<>

@@ -21,8 +21,9 @@ const login = ()=>{
     axios.post(`${Enviroment.BASE_URL}/user/login`,{email,password}).then(res=>{
         if(res.data && res.data.token){
             const {token} = res.data
-            setError(false)
             localStorage.setItem("token",token)
+            setError(false)
+          
             navigate("/home")
             
         }

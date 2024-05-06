@@ -1,8 +1,6 @@
 import { useState } from "react"
 
-import axios from "axios"
-import Enviroment from "../../core"
-import SignCard from "./SignCard"
+
 import LoginCard from "./LogInCard"
 import LogoCard from "./LogoCard"
 

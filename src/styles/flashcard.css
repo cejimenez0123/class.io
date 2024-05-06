@@ -1,0 +1,41 @@
+#flashcard--page{
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.flip-card {
+    background-color: transparent;
+    
+    perspective: 1000px;
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-front {
+    background-color: #B3B3FD;
+    color: #0C0A0F;
+  }
+  
+  .flip-card-back {
+    background-color: #F9F8F8;
+    color: #0C0A0F;
+    transform: rotateY(180deg);
+  }

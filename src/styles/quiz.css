@@ -13,10 +13,7 @@
     max-width: 4em;
 
 }
-/* #quiz--page .buttons{
-    margin:4rem auto 0em auto;
-    width:fit-content;
-} */
+
 .success {
     animation-name: success;
     animation-duration: 2s;

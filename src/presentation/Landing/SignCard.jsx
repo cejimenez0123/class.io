@@ -29,7 +29,6 @@ function SignCard(props){
         setIsEducator(e.currentTarget.checked)
     }
     const signUp = (e)=>{
-        console.log("touch")
             axios.post(`${Enviroment.BASE_URL}/user/register`,
                 {   name:name,
                     email:email,
