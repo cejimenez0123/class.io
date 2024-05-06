@@ -63,7 +63,7 @@ export default function Navbar(props){
     </div>
     </div>
   <div className="flex-1">
-    <a className="btn btn-ghost text-xl">Class.io</a>
+    <Link to={loggedIn? "/home":"/"} className="btn btn-ghost text-xl">Class.io</Link>
   </div>
 
       <div className="navbar-center hidden lg:flex">

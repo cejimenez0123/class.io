@@ -2,5 +2,7 @@
     height: 100vh;
     width: 100vw;
     overflow: scroll;
-  
+    display: grid;
+    background-color: white;
+    grid-template-columns: 70% 30%;
 }

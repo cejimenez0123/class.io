@@ -31,7 +31,7 @@ export default function ProfilePage(props){
         <div id="profile--page">
             <div className="pl-8 pt-16">
             <h1 className="text-base-100 text-3xl mb-8" >Previous Quizzes</h1>
-            {quizzes?<div className="flex flex-row">{quizzes.map(qObj=>{
+            {quizzes?<div style={{overflow:"scroll"}}className="flex flex-row">{quizzes.map(qObj=>{
                 const {quiz} = qObj
                 let topic = topics.find(topic=>topic.id===quiz.topicId)
                 const time = new Date(quiz.created).toLocaleTimeString("en-US")

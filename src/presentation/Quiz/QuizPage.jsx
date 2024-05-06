@@ -10,43 +10,63 @@ import AnswerCard from './AnswerCard'
 import MyContext from '../../context'
 function QuizPage(props){
     const navigate = useNavigate()
+    const [index,setIndex] = useState(0)
     const {setChosenAnswers,correctAnswers,setCorrectAnswers} = useContext(MyContext)
     const [questions,setQuestions]=useState([])
     const [question,setQuestion]=useState(null)
     const [answers,setAnswers]=useState([])
+    const [count,setCount]=useState(1)
     const [active,setActive]=useState(true)
     
     const params = useParams()
     const topicId = params["topicId"]
     const quizId = params["quizId"]
-    function getQuestion(){
-        axios.get(`${Enviroment.BASE_URL}/question/topic/${topicId}/quiz/${quizId}`).then(res=>{
-            const {question,answers}= res.data
-            setQuestion(question)
-            setAnswers(answers)
-            setQuestions(prevState=>{return[...prevState,question]})
-            setActive(true)
+    function getQuestions(){
+        axios.get(`${Enviroment.BASE_URL}/question/topic/${topicId}/quiz/${quizId}/${count}`).then(res=>{
+                setQuestions(res.data)
+                const {question,answers} = res.data[0]
+                setQuestion(question)
+                setAnswers(answers)
+                setActive(true)
         }) 
     }
-    
+    const handleNext = ()=>{
+        if(index<questions.length-1){
+            const newIndex = index+1
+            let {question,answers} = questions[newIndex]
+            setQuestion(question)
+            console.log(questions)
+            setAnswers(answers)
+            setActive(true)
+            setIndex(newIndex)
+        }
+
+    }
+    const handleCount = (e)=>
+    {   if(e.currentTarget.value>0){
+        setCount(e.currentTarget.value)
+    }
+    }
     const newQuiz = ()=>{
         setChosenAnswers([])
         setCorrectAnswers([])
         setQuestions([])
-        getQuestion()
+        getQuestions()
 
     }
     function handleChoice(answer,response){
         
         if(question.correctAnswer.includes(answer.content)){    
-            response(true)
+           
             setActive(false)
             setChosenAnswers(prevState=>[...prevState,answer])
             setCorrectAnswers(prevState=>[...prevState,answer])
+            response(true)
         }else{
-            response(false)
+           
             setActive(false)
             setChosenAnswers(prevState=>[...prevState,answer])
+            response(false)
         }
 
        
@@ -54,7 +74,7 @@ function QuizPage(props){
     const handleDone = ()=>{
         navigate("/quiz/complete")
     }
-    return(<div id='quiz--page'>
+    return(<div id='quiz--page' className='bg-offwhite'>
         
             <div className='mx-auto pt-16'>
                 {question?<div className='main'>
@@ -69,23 +89,35 @@ function QuizPage(props){
                 </div>:null}
             </div>
 
-            <div className="buttons">
+            <div className="buttons mx-auto">
             {question?
             <div>
-                <button className='btn-primary border-solid  my-40 border-black w-48 bg-black text-white mx-4 hover:bg-slate-400 border rounded-lg px-8 py-4'
-             onClick={getQuestion}>Next</button>
+               {index+1!==questions.length? 
+               <button className='btn-primary
+                                    w-48 
+                                    h-24
+                                    text-offwhite
+                                    text-2xl
+                                 border-solid  my-24 border-black w-48 bg-base-100 text-white mx-4 hover:bg-slate-400 border rounded-lg px-8 py-4'
+             onClick={handleNext}>Next</button>:null}
              <button onClick={handleDone} className='btn-primary 
                                 border-solid  
-                                my-40 border-black 
-                                w-48 bg-white 
+                                my-24 border-base-100
+                                w-48 
+                                h-24
+                                text-2xl
+                                text-backtoblack
+                                bg-offwhite
                                 hover:bg-slate-400 
                                 border 
                                 rounded-lg
                                 px-8 
-                                py-4'>
-                Done</button></div>:
-            <button className='btn-primary border-solid  my-40 border-black w-48 bg-white hover:bg-slate-400 border rounded-lg px-8 py-4'
-             onClick={newQuiz}>Start</button>}
+                               '>
+                Done</button></div>:<div className='w-64 text-center'>
+                <h1 className='pb-8'>How many questions for this quiz?</h1>
+                <input type="number" className='input w-full bg-offwhite input-bordered max-w-xs'  name='count' value={count} onChange={(e)=>handleCount(e)}/>
+            <button className='btn-primary border-solid text-2xl mx-auto my-40 border-backtoblack bg-backtoblack text-offwhite w-64 bg-white hover:bg-slate-400 border rounded-lg px-6 py-4'
+             onClick={newQuiz}>Start</button></div>}
             </div>
 
     </div>)

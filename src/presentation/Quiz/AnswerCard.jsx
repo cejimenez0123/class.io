@@ -10,9 +10,12 @@ function AnswerCard(props){
     return(<div  onClick={
         ()=>props.active? props.handleChoice(props.answer,bool=>{
             if(bool){
-                ref.current.style.backgroundColor ="aquamarine"
+                let green =
+                // ref.current.style.backgroundColor =green
+                ref.current.style.border="4px solid #809236"
             }else{
-                ref.current.style.backgroundColor="red"
+                // ref.current.style.backgroundColor ="#FF0000"
+                ref.current.style.border=" 4px solid #FF0000"
             }
            
         }):null
