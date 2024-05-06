@@ -6,7 +6,7 @@ import "../../styles/home.css"
 import useCaseCreateQuiz from '../../usecase/useCaseCreateQuiz'
 import { useNavigate } from 'react-router-dom'
 const token = localStorage.getItem('token')
-console.log(token)
+
 const fetcher = url => axios(url,{headers:{Authorization: `Bearer ${token}`}}).then(r => r.data)
 
 function HomePage(props){
@@ -19,6 +19,9 @@ function HomePage(props){
         useCaseCreateQuiz(topic.id,data=>{
             navigate(`/quiz/${data.id}/topic/${data.topicId}/`)
         })
+    }
+    if(!token){
+        navigate("/")
     }
     if(isLoading) return <div className='bg-white  home--page '>
         Loading
